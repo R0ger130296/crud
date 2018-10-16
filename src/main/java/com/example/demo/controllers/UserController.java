@@ -20,29 +20,34 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class UserController {
 
 	@Autowired
-	protected UserService userService;
-	
+	public UserService userService;
+
 	protected ObjectMapper mapper;
-	
+
 	@RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
-	public RestResponse saveOrUpdate(@RequestBody String userJson) 
+	public RestResponse saveOrUpdate(@RequestBody String userJson)
 			throws JsonParseException, JsonMappingException, IOException {
-	
-		User user = this.mapper.readValue(userJson, User.class);
+
+		User user = new User();
+
+		try {
+			user = this.mapper.readValue(userJson, User.class);
+			System.out.println(user);
+			if (this.validate(user)) {
+				return new RestResponse(HttpStatus.NOT_ACCEPTABLE.value(), "ESTOS CAMPOS SON OBLIGATORIOS");
+			}
+			this.userService.save(user);
+
+		} catch (Exception e) {
 		
-		if(this.validate(user)) {
-			return new RestResponse(HttpStatus.NOT_ACCEPTABLE.value(),
-					"ESTOS CAMPOS SON OBLIGATORIOS");
 		}
-		this.userService.save(user);
-		
-		return new RestResponse(HttpStatus.OK.value(),
-				"OPERACION EXISTOSA");
+
+		return new RestResponse(HttpStatus.OK.value(), "OPERACION EXISTOSA");
 	}
-	
+
 	private boolean validate(User user) {
 		boolean isValid = true;
-		
+
 		if (user.getFirstName() == null) {
 			isValid = false;
 		}

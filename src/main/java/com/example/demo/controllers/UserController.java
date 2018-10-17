@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,9 @@ public class UserController {
 	protected UserService userService;
 
 	protected ObjectMapper mapper;
-
+	
+/* metodo editar y guardar*/
+	
 	@RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
 	public RestResponse saveOrUpdate(@RequestBody String userJson)
 			throws JsonParseException, JsonMappingException, IOException {
@@ -47,6 +50,15 @@ public class UserController {
 		return new RestResponse(HttpStatus.OK.value(), "OPERACION EXISTOSA");
 	}
 
+	@RequestMapping(value = "/getUsers", method = RequestMethod.GET)
+
+	/*metodo buscar*/
+	
+	public List<User> getUsers() {
+		
+		return this.userService.findAll();
+	}
+	 
 	private boolean validate(User user) {
 		boolean isValid = true;
 

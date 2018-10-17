@@ -7,10 +7,10 @@ public class QueryResult {
 	private int totalRecords;
 	private List<Object> list;
 	
+	
 	public int getTotalRecords() {
 		return totalRecords;
-		
-		
+			
 	}
 	public void setTotalRecords(int totalRecords) {
 		this.totalRecords = totalRecords;

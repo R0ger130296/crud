@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class UserController {
 
 	@Autowired
-	public UserService userService;
+	protected UserService userService;
 
 	protected ObjectMapper mapper;
 
@@ -28,8 +28,9 @@ public class UserController {
 	public RestResponse saveOrUpdate(@RequestBody String userJson)
 			throws JsonParseException, JsonMappingException, IOException {
 
-		User user = new User();
-
+         User user = new User();
+		
+         this.mapper = new ObjectMapper();
 		try {
 			user = this.mapper.readValue(userJson, User.class);
 			System.out.println(user);
@@ -39,6 +40,7 @@ public class UserController {
 			this.userService.save(user);
 
 		} catch (Exception e) {
+							
 		
 		}
 
@@ -48,13 +50,13 @@ public class UserController {
 	private boolean validate(User user) {
 		boolean isValid = true;
 
-		if (user.getFirstName() == null) {
+		if (user.getFirstName() == "" || user.getFirstName()==null) {
 			isValid = false;
 		}
-		if (user.getFirstSurname() == null) {
+		if (user.getFirstSurname() == "" || user.getFirstSurname()==null) {
 			isValid = false;
 		}
-		if (user.getAddress() == null) {
+		if (user.getAddress() == "" || user.getAddress()== null) {
 			isValid = false;
 		}
 		return isValid;

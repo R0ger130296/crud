@@ -21,9 +21,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class UserController {
 
 	@Autowired
-	protected UserService userService;
+	private UserService userService;
 
-	protected ObjectMapper mapper;
+	private ObjectMapper mapper;
 	
 /* metodo editar y guardar*/
 	
@@ -57,6 +57,18 @@ public class UserController {
 	public List<User> getUsers() {
 		
 		return this.userService.findAll();
+	}
+	
+	@RequestMapping(value="/deleteUser", method = RequestMethod.POST)
+	public void deleteUser(@RequestBody String userJson) 
+	throws Exception 
+	 {
+	this.mapper = new ObjectMapper();
+	  User user = this.mapper.readValue(userJson, User.class);
+	   if (user.getId()== 0L) {
+		   throw new Exception ("El Id esta nulo");
+	   }
+	this.userService.deleteUser(user.getId());
 	}
 	 
 	private boolean validate(User user) {

@@ -41,13 +41,13 @@ public class UserController {
 				return new RestResponse(HttpStatus.NOT_ACCEPTABLE.value(), "ESTOS CAMPOS SON OBLIGATORIOS");
 			}
 			this.userService.save(user);
+			return new RestResponse(HttpStatus.OK.value(), "OPERACION EXISTOSA");
 
 		} catch (Exception e) {
-							
-		
+			System.out.println(e);				
+			return new RestResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "ERROR");
 		}
 
-		return new RestResponse(HttpStatus.OK.value(), "OPERACION EXISTOSA");
 	}
 
 	@RequestMapping(value = "/getUsers", method = RequestMethod.GET)

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
-import com.example.demo.util.RestResponse;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,10 +25,11 @@ public class UserController {
 
 	private ObjectMapper mapper;
 	
-/* metodo editar y guardar*/
-	
+/* metodo editar y guardar*/ 
+
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
-	public RestResponse saveOrUpdate(@RequestBody String userJson)
+	public ResponseEntity saveOrUpdate(@RequestBody String userJson)
 			throws JsonParseException, JsonMappingException, IOException {
 
          User user = new User();
@@ -37,15 +38,18 @@ public class UserController {
 		try {
 			user = this.mapper.readValue(userJson, User.class);
 			System.out.println(user);
-			if (this.validate(user)) {
-				return new RestResponse(HttpStatus.NOT_ACCEPTABLE.value(), "ESTOS CAMPOS SON OBLIGATORIOS");
+			
+			if (!this.validate(user)) {
+				System.out.println("if");
+				return new ResponseEntity(HttpStatus.NOT_ACCEPTABLE);
 			}
 			this.userService.save(user);
-			return new RestResponse(HttpStatus.OK.value(), "OPERACION EXISTOSA");
+			System.out.println("save");
+			return new ResponseEntity(HttpStatus.OK);
 
 		} catch (Exception e) {
 			System.out.println(e);				
-			return new RestResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "ERROR");
+			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}

@@ -43,6 +43,18 @@ public class User extends parentEntity {
 	
 	@Column(name = "exttelefono" , nullable=false, length=5 )
     private String extTelefono;
+	
+	@Column(name = "name_computer" , nullable=false, length=45 )
+    private String nameComputer;
+	
+	@Column(name = "so" , nullable=false, length=45 )
+    private String sistemaOperativo;
+	
+	@Column(name = "dominio" , nullable=false, length=2 )
+    private String dominio;
+	
+	@Column(name = "outlook" , nullable=false, length=2 )
+    private String outlook;
 
 	public String getFirstName() {
 		return firstName;
@@ -103,6 +115,30 @@ public class User extends parentEntity {
 	}
 	public void setextTelefono(String extTelefono) {
 		this.extTelefono = extTelefono;
+	}
+	public String getnameComputer() {
+		return nameComputer;
+	}
+	public void setnameComputer(String nameComputer) {
+		this.nameComputer = nameComputer;
+	}
+	public String getsistemaOperativo() {
+		return sistemaOperativo;
+	}
+	public void setsistemaOperativo(String sistemaOperativo) {
+		this.sistemaOperativo = sistemaOperativo;
+	}
+	public String getdominio() {
+		return dominio;
+	}
+	public void setdominio(String dominio) {
+		this.dominio = dominio;
+	}
+	public String getoutlook() {
+		return outlook;
+	}
+	public void setoutlook(String outlook) {
+		this.outlook = outlook;
 	}
 	
 }

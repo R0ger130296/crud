@@ -99,6 +99,18 @@ public class UserController {
 		if (user.getextTelefono() == "" || user.getextTelefono()== null) {
 			isValid = false;
 		}
+		if (user.getnameComputer() == "" || user.getnameComputer()== null) {
+			isValid = false;
+		}
+		if (user.getsistemaOperativo() == "" || user.getsistemaOperativo()== null) {
+			isValid = false;
+		}
+		if (user.getdominio() == "" || user.getdominio()== null) {
+			isValid = false;
+		}
+		if (user.getoutlook() == "" || user.getoutlook()== null) {
+			isValid = false;
+		}
 		return isValid;
 	}
 }

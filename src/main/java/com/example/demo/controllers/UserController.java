@@ -87,6 +87,18 @@ public class UserController {
 		if (user.getAddress() == "" || user.getAddress()== null) {
 			isValid = false;
 		}
+		if (user.getCedula() == "" || user.getCedula()== null) {
+			isValid = false;
+		}
+		if (user.getcorreoPersonal() == "" || user.getcorreoPersonal()== null) {
+			isValid = false;
+		}
+		if (user.getcorreoEspe() == "" || user.getcorreoEspe()== null ) {
+			isValid = false;
+		}
+		if (user.getextTelefono() == "" || user.getextTelefono()== null) {
+			isValid = false;
+		}
 		return isValid;
 	}
 }

@@ -31,7 +31,18 @@ public class User extends parentEntity {
 	
 	@Column(name = "address", nullable=false, length=150 )
 	private String address;
-
+	
+	@Column(name = "cedula" , nullable=false, length=15 )
+     private String cedula;
+	 
+	@Column(name = "correopersonal" , nullable=false, length=45 )
+    private String correoPersonal;
+	
+	@Column(name = "correoespe" , nullable=false, length=45 )
+    private String correoEspe;
+	
+	@Column(name = "exttelefono" , nullable=false, length=5 )
+    private String extTelefono;
 
 	public String getFirstName() {
 		return firstName;
@@ -69,4 +80,29 @@ public class User extends parentEntity {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public String getCedula() {
+		return cedula;
+	}
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+	public String getcorreoPersonal() {
+		return correoPersonal;
+	}
+	public void setcorreoPersonal(String correoPersonal) {
+		this.correoPersonal = correoPersonal;
+	}
+	public String getcorreoEspe() {
+		return correoEspe;
+	}
+	public void setcorreoEspe(String correoEspe) {
+		this.correoEspe = correoEspe;
+	}
+	public String getextTelefono() {
+		return extTelefono;
+	}
+	public void setextTelefono(String extTelefono) {
+		this.extTelefono = extTelefono;
+	}
+	
 }
